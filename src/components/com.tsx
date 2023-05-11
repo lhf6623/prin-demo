@@ -1,4 +1,4 @@
-import JsBarcode from "jsbarcode";
+import type { BaseOptions } from "jsbarcode";
 const textOpt: Record<
   string,
   {
@@ -37,13 +37,23 @@ const textOpt: Record<
     min: 0,
     max: 100,
   },
+  fontSize: {
+    text: "字号",
+    min: 0,
+    max: 100,
+  },
+  imgWidth: {
+    text: "图片宽度",
+    min: 100,
+    max: 1500,
+  },
 };
 
-export function SettingPanel(opt: JsBarcode.Options): JSX.Element {
+export function SettingPanel(opt: BaseOptions): JSX.Element {
   return (
     <>
       {Object.keys(opt).map((item) => {
-        const key = item as keyof JsBarcode.Options;
+        const key = item as keyof BaseOptions;
         return (
           <p class="flex mb-2">
             <label for={key} class="w-70px">
