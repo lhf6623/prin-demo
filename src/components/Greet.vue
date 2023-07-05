@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO: 这个不用管，项目初始化的页面，没啥用
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/tauri";
 

@@ -105,8 +105,8 @@ function filterateList() {
       <button @click="showCode" class="border-1px p-1 px-4 ml-1">确认</button>
     </p>
   </div>
-  <div v-else class="flex p-2 box-border h-full">
-    <div class="p-2 border-1px mr-1">
+  <div v-else class="flex p-1 box-border h-full">
+    <div class="p-1 border-1px mr-1">
       <h2 class="text-center mb-2">
         配置
         <span class="text-red-400 text-xs">会在本地记录</span>

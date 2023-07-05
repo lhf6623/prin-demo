@@ -15,6 +15,12 @@ export interface StateOptions extends BaseOptions {
   imgWidth: number;
 }
 
+/**
+ * 获取文字的宽度
+ * @param text 目标文字
+ * @param font 文字样式
+ * @returns
+ */
 export function getTextWidth(text: string, font: string = "bold 12pt arial") {
   var canvas = document.createElement("canvas");
   var context = canvas.getContext("2d");
@@ -23,6 +29,13 @@ export function getTextWidth(text: string, font: string = "bold 12pt arial") {
   return Math.ceil(metrics.width);
 }
 
+/**
+ * 获取二维码 在左下角添加文字
+ * @param text 二维码的文字
+ * @param prefix 左下角文字
+ * @param opt JsBarcode 配置
+ * @returns
+ */
 export function textToBase64Barcode(
   text: string,
   prefix: string = "",
@@ -48,6 +61,11 @@ export function textToBase64Barcode(
   return canvas.toDataURL("image/png");
 }
 
+/**
+ * 打印
+ * @param base64 图片base64数据
+ * @param opt 打印配置
+ */
 export function printHtml(base64: string, opt: StateOptions) {
   const { imgWidth } = opt;
   const iframe = document.createElement("iframe");
@@ -57,19 +75,20 @@ export function printHtml(base64: string, opt: StateOptions) {
   const img = document.createElement("img");
   img.src = base64;
   img.width = imgWidth;
-  iframe.contentWindow!.document.head.innerHTML = `<style type="text/css" media="print">
-  @page 
-    {
-        size: auto;   /* auto is the initial value */
-        margin: 0mm;  /* this affects the margin in the printer settings */
+  // 这个样式是打印页面的样式
+  iframe.contentWindow!.document.head.innerHTML = `
+  <style type="text/css" media="print">
+    @page {
+      size: auto;   /* auto is the initial value */
+      margin: 0mm;  /* this affects the margin in the printer settings */
     }
-</style>
-<style>
-*{
-  padding: 0;
-  margin: 0;
-}
-</style>
+  </style>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+  </style>
 `;
   iframe.contentWindow!.document.body.appendChild(img);
   iframe.contentWindow?.focus();
@@ -80,6 +99,12 @@ export function printHtml(base64: string, opt: StateOptions) {
   }, 1000);
 }
 
+/**
+ * 获取数据列表
+ * @param urlState 
+ * @param state 
+ * @returns 
+ */
 export const useGetList = (
   urlState: Ref<{ url: string; isUrl: boolean }>,
   state: RemovableRef<StateOptions>
@@ -159,7 +184,6 @@ export const useGetList = (
       if (isUrl && url) {
         getNum();
       }
-      console.log(1);
     }, 10 * 1000);
   });
   return {

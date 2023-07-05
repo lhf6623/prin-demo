@@ -54,23 +54,24 @@ export function SettingPanel(opt: BaseOptions): JSX.Element {
     <>
       {Object.keys(opt).map((item) => {
         const key = item as keyof BaseOptions;
+        const { min, max, text } = textOpt[key];
         return (
           <p class="flex mb-2">
             <label for={key} class="w-70px">
-              {textOpt[key].text}
+              {text}
             </label>
             <input
               type="range"
               name={key}
-              min={textOpt[key].min}
-              max={textOpt[key].max}
+              min={min}
+              max={max}
               v-model={opt[key]}
             />
             <input
               type="number"
               class="ml-2 border-1px w-60px"
-              min={textOpt[key].min}
-              max={textOpt[key].max}
+              min={min}
+              max={max}
               v-model={opt[key]}
             />
           </p>
